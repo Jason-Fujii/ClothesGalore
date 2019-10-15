@@ -1,0 +1,22 @@
+<!doctype html> 
+<html> 
+<head> 
+<meta charset="UTF-8"> 
+<script src="student2.js"> 
+</script> 
+</head>
+
+<body>
+<div id = "head"></div>
+<script>document.getElementById('head').innerHTML = getHeader();</script>
+
+<table style='width:100%' cellpadding='5' border = 1><tr> 
+<td style='width:10%'><div id='my_menu'>Menu</div></td> 
+<td style='width:90%'><div id='my_main'> Main Web Page</div></td> 
+</tr></table>
+
+<div id = "foot"></div>
+<script>document.getElementById('foot').innerHTML = getFooter(companyName, address, phoneNumber);</script>
+</body>
+
+</html>
