@@ -7,10 +7,11 @@
 </head>
 
 <body>
-<span id = "date"><span>
+<div id = "date"></div>
 <div id = "head"></div>
 <script>
-document.getElementById('date').innerHTML = getDate();
+var date = new Date();
+document.getElementById('date').innerHTML = getDate(date);
 document.getElementById('head').innerHTML = getHeader2();
 </script>
 
@@ -20,9 +21,13 @@ document.getElementById('head').innerHTML = getHeader2();
 </tr></table>
 
 <script>
-var HP = {name: "Harry Potter", id: "12345", desc: "Teenage wizard repeatedly foils murder plots against him by a noseless, bald wizard."};
+var Sweater = {name: "Sweater", id:"123", desc:"It's officially sweater weather. Get your sweaters here!"};
+var Boots = {name: "Boots", id:"521", desc:"Get your boots before the snowfall!"};
+var Shirt = {name: "Shirt", id:"732", desc:"Dream of a Hawaiian escape with our new Tropical shirts!"};
+getProduct(jsonobj);
+getProduct(jsonobj);
 document.getElementById('my_menu').innerHTML = makeMenu(3);
-document.getElementById('my_main').innerHTML = makeMain(HP);
+document.getElementById('my_main').innerHTML = makeMain(Sweater);
 </script>
 
 <div id = "foot"></div>
