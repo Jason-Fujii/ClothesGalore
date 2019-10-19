@@ -7,16 +7,26 @@
 </head>
 
 <body>
+<span id = "date"><span>
 <div id = "head"></div>
-<script>document.getElementById('head').innerHTML = getHeader();</script>
+<script>
+document.getElementById('date').innerHTML = getDate();
+document.getElementById('head').innerHTML = getHeader2();
+</script>
 
 <table style='width:100%' cellpadding='5' border = 1><tr> 
 <td style='width:10%'><div id='my_menu'>Menu</div></td> 
 <td style='width:90%'><div id='my_main'> Main Web Page</div></td> 
 </tr></table>
 
+<script>
+var HP = {name: "Harry Potter", id: "12345", desc: "Teenage wizard repeatedly foils murder plots against him by a noseless, bald wizard."};
+document.getElementById('my_menu').innerHTML = makeMenu(3);
+document.getElementById('my_main').innerHTML = makeMain(HP);
+</script>
+
 <div id = "foot"></div>
-<script>document.getElementById('foot').innerHTML = getFooter(companyName, address, phoneNumber);</script>
+<script>document.getElementById('foot').innerHTML = getFooter2(companyName, address, phoneNumber);</script>
 </body>
 
 </html>
