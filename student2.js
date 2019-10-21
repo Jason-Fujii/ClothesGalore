@@ -1,4 +1,5 @@
 var jsonobj = { "type":"clothes", "number":"2" };
+var jsonobj2 = {"type":"clothes", "number":"1"};
 //Global variables
 companyName = "Clothes Galore";
 address = "1234 Fake Street";
@@ -26,7 +27,7 @@ function getHeader2()
 {
     var head = "<table bgcolor='Gold' style='width:100%'>";
     //head += "<tr><td colspan='2' align = 'right'>" + getDate() + "</td></tr>";
-    head += "<tr><th align='center' colspan='2'>"+companyName+"</th></tr>";
+    head += "<tr><th align='center' colspan='2'><h1>"+companyName+"</h1></th></tr>";
     head += "<tr><td align='center'>"+address+"</td>";
     head += "<td align = 'center'>"+phoneNumber+"</td></tr>";
     head += "</table>";
@@ -91,26 +92,11 @@ function makeMain(Product)
     mainStr += "<td id='prod_name'>"+Product.name+"</td>";
     mainStr += "<td style='text-align:right' id='prod_id'>"+Product.id+"</td></tr>";
     mainStr += "<tr><td style='text-align:center' colspan=2>";
-    mainStr += "<span id='prod_bar'>"+makeLinkBar()+"</span> </td></tr>";
-    //mainStr += "document.getElementById('prod_bar').innerHTML = makeLinkBar()";
+    mainStr += "<span id='prod_bar'>"+makeLinkBar(Product)+"</span> </td></tr>";
     mainStr += "<tr><td colspan=2 id='prod_desc'>"+Product.desc+"</td></tr>";
     mainStr += "</table>";
     return mainStr;
 }//end makeMain
-
-
-
-function deal() {  
-    imgURL = 'https://college1.com/classes/cs190/lecture/images'; 
-
-    whichcard = Math.floor(Math.random() * 1000) % 52;  
-    imagesrc = imgURL + "/cards/gbCard" + whichcard + ".gif"; 
-    document.getElementById('card0').src=imagesrc; 
- 
-    whichcard = Math.floor(Math.random() * 1000) % 52;  
-    imagesrc= imgURL + "/cards/gbCard" + whichcard + ".gif"; 
-    document.getElementById('card1').src=imagesrc; 
- }//end deal
 
 function dealCards()
 {
@@ -122,7 +108,8 @@ function dealCards()
     cardTable += "<td><img id='card3' src='https://college1.com/classes/cs190/lecture/images/cards/gbCard52.gif'></td>";
     cardTable += "<td><img id='card4' src='https://college1.com/classes/cs190/lecture/images/cards/gbCard52.gif'></td>";
     cardTable += "</tr></table>";
-    deal();
+    document.getElementById("card0").src = addCard();
+    document.getElementById("card1").src = addCard();
     return cardTable;
 } // end dealCards
 
@@ -132,6 +119,10 @@ function dealCards()
     imgURL = 'https://college1.com/classes/cs190/lecture/images'; 
     whichcard = Math.floor(Math.random() * 1000) % 52;  
     imagesrc = imgURL + "/cards/gbCard" + whichcard + ".gif"; 
+    while(document.getElementById("card0").src == imagesrc || document.getElementById("card1").src == imagesrc || document.getElementById("card2").src == imagesrc || document.getElementById("card3").src == imagesrc || document.getElementById("card4").src == imagesrc)
+    {
+        imagesrc = addCard();
+    }
     return imagesrc;
  }//end addCard
 
@@ -139,7 +130,9 @@ function dealCards()
  {
     if(cardNum < 5 && cardNum != -1)
     {
-        document.getElementById(cardNum).src = addCard();
+        var cardHTML = addCard();
+        card = "card"+cardNum;
+        document.getElementById(card).src = cardHTML;
         cardNum++;
     }
     else if(cardNum == -1)
@@ -148,42 +141,37 @@ function dealCards()
         alert("The maximum number of cards allowed have already been distributed");
  }//end hitCard
 
-function closeAd(win)
- {
-     win.close();
- }//end closeAd
-
  function popupAd(str)
  {
-     if(str.equals(""))
+     if(str == "")
      {
-     if(popUpNum == 1)
-     {
-        popUp = open("", "Sweater Ad");
-        popUp.document.writeln("<span id = 'my_popup'></span>");
-        popUp.document.close();
-        popUp.focus();
-        popUp.document.getElementById("my_popup").innerHTML = makeSweaterAd();
-        popUpNum++;
-     }
-     else if(popUpNum == 2)
-     {
-        popUp = open("", "Boots Ad");
-        popUp.document.writeln("<span id = 'my_popup'></span>");
-        popUp.document.close();
-        popUp.focus();
-        popUp.document.getElementById("my_popup").innerHTML = makeBootAd();
-        popUpNum++;
-     }
-     else
-     {
-        popUp = open("", "Shirt Ad");
-        popUp.document.writeln("<span id = 'my_popup'></span>");
-        popUp.document.close();
-        popUp.focus();
-        popUp.document.getElementById("my_popup").innerHTML = makeShirtAd();
-        popUpNum = 1;
-     }
+        if(popUpNum == 1)
+        {
+            popUp = open("", "Sweater Ad", "height=550,width=550");
+            popUp.document.writeln("<span id = 'my_popup'></span>");
+            popUp.document.close();
+            popUp.focus();
+            popUp.document.getElementById("my_popup").innerHTML = makeSweaterAd();
+            popUpNum++;
+        }
+        else if(popUpNum == 2)
+        {
+            popUp = open("", "Boots Ad", "height=350,width=350");
+            popUp.document.writeln("<span id = 'my_popup'></span>");
+            popUp.document.close();
+            popUp.focus();
+            popUp.document.getElementById("my_popup").innerHTML = makeBootAd();
+            popUpNum++;
+        }
+        else
+        {
+            popUp = open("", "Shirt Ad", "height=650,width=650");
+            popUp.document.writeln("<span id = 'my_popup'></span>");
+            popUp.document.close();
+            popUp.focus();
+            popUp.document.getElementById("my_popup").innerHTML = makeShirtAd();
+            popUpNum = 1;
+        }
     }
     else
     popUp.close();
@@ -215,7 +203,7 @@ function closeAd(win)
  {
     var ad = "<TABLE WIDTH=400 HEIGHT=100 BGCOLOR=orange>";
     ad += "<TR><TD>";
-    ad += "<H1 ALIGN=CENTER>Shirts! Shirts! Shirts! Shirts!<br> Click on product #3</H1>";
+    ad += "<H1 ALIGN=CENTER>Shirts! Shirts! Shirts! Shirts! Shirts! Shirts!<br> EVERYBODY Click on product #3!</H1>";
     ad += "</TD></TR>";
     ad += "</TABLE>";
     return ad;
@@ -296,14 +284,10 @@ function closeAd(win)
     menu += "<button type='button' onclick='document.getElementById(\"my_main\").innerHTML = makeMain(product5)'>Product #5</button>";
     menu += "<button type='button' onclick='document.getElementById(\"my_main\").innerHTML = dealCards()'>Deal Cards</button>";
     menu += "<button type='button' onclick='document.getElementById(\"my_main\").innerHTML = hitCard()'>Hit Card</button>";
-    menu += "<button type='button' onclick='document.getElementById(\"my_main\").innerHTML = popupAd(\"\")'>PopUp Ad</button>";
-    menu += "<button type='button' onclick='document.getElementById(\"my_main\").innerHTML = popopAd(\"close\")'>Close ad</button>";
+    menu += "<button type='button' onclick=popupAd(\"\")>Popup Ad</button>";
+    menu += "<button type='button' onclick=popupAd(\"close\")>Close Ad</button>";
     menu += "<button type='button' onclick='document.getElementById(\"my_main\").innerHTML = makeForm()'>Enter Data</button>";
     menu += "<br>";
-    /*for(var i = 0; i < size; i++)
-    {
-        menu += "Menu <br>";
-    }*/
     return menu;
 }//end makeMenu
 
